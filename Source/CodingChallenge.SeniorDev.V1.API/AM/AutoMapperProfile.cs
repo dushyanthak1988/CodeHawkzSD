@@ -19,6 +19,7 @@ namespace CodingChallenge.SeniorDev.V1.API.AM
             CreateMap<Teacher, TeacherModel>()
               .ForMember(c => c.FullName, o => o.MapFrom(c => $"{c.FirstName} {c.LastName}"));
 
+            CreateMap<StudentCreateModel ,Student>();
         }
     }
 }

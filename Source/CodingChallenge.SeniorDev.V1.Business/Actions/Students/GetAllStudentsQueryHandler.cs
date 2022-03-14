@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace CodingChallenge.SeniorDev.V1.Business.Actions.Student
+namespace CodingChallenge.SeniorDev.V1.Business.Actions.Students
 {
     public class GetAllStudentsQuery : IRequest<GetAllStudentsQueryResult>
     {

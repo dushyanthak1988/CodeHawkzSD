@@ -1,5 +1,5 @@
 ﻿using CodingChallenge.SeniorDev.V1.API.Controllers.Definitions;
-using CodingChallenge.SeniorDev.V1.Business.Actions.Student;
+using CodingChallenge.SeniorDev.V1.Business.Actions.Students;
 using CodingChallenge.SeniorDev.V1.Common.Configuration;
 using CodingChallenge.SeniorDev.V1.Common.DTO;
 using MediatR;
@@ -27,7 +27,8 @@ namespace CodingChallenge.SeniorDev.V1.API.Controllers
         [HttpPost]
         public async Task<ActionResult<StudentModel>> Create(StudentCreateModel request)
         {
-            return null;
+            var result = await mediator.Send(new CreateStudentQuery { student = request });
+            return Ok(result);
         }
 
         [HttpPut]
