@@ -14,7 +14,7 @@ namespace CodingChallenge.SeniorDev.V1.API.Controllers
     {
         public CoursesController(IMediator mediator, IOptionsSnapshot<CodingChallengeConfiguration> configuration)
             : base(mediator, configuration)
-        {}
+        { }
 
         [HttpGet]
         [Route("all")]
@@ -25,9 +25,25 @@ namespace CodingChallenge.SeniorDev.V1.API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> EnrollToCourse()
+        public async Task<ActionResult> EnrollToCourse(EnrollToCourseModel request)
         {
-            return Ok();
+            var validateData = await mediator.Send(new CourseEnrollValidateQuery
+            {
+                CourseID = request.CourseID,
+                StudentID = request.StudentID
+            });
+
+            string Errormsg = validateData.Errormsg;
+            if (string.IsNullOrEmpty(Errormsg))
+            {
+                var result = await mediator.Send(new GetAllCoursesQuery());
+                return Ok(result.CourseList);
+            }
+            else
+            {
+                return BadRequest(Errormsg);
+
+            }
         }
     }
 }
