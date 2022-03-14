@@ -38,7 +38,7 @@ namespace CodingChallenge.SeniorDev.V1.Business.Actions.Students
 
             if (request.SearchType == ValidateType.SearchByNIC)
             {
-                var obj = dataContext.Students.Where(row => string.Equals(row.NICNo.Trim(), request.student.NICNo.Trim(), StringComparison.OrdinalIgnoreCase)).ToList();
+                var obj = dataContext.Students.Where(row => row.NICNo.Trim() == request.student.NICNo.Trim()).ToList();
 
                 if (obj.Count > 0)
                 {
@@ -48,7 +48,7 @@ namespace CodingChallenge.SeniorDev.V1.Business.Actions.Students
             }
             else if (request.SearchType == ValidateType.SearchByEmail)
             {
-                var obj = dataContext.Students.Where(row => string.Equals(row.Email.Trim(), request.student.Email.Trim(), StringComparison.OrdinalIgnoreCase)).ToList();
+                var obj = dataContext.Students.Where(row => row.NICNo.Trim() == request.student.NICNo.Trim()).ToList();
 
                 if (obj.Count > 0)
                 {
@@ -58,7 +58,7 @@ namespace CodingChallenge.SeniorDev.V1.Business.Actions.Students
             }
             else if (request.SearchType == ValidateType.RegistrationID)
             {
-                var obj = dataContext.Students.Where(row => string.Equals(row.RegistrationID.Trim(), request.student.RegistrationID.Trim(), StringComparison.OrdinalIgnoreCase)).ToList();
+                var obj = dataContext.Students.Where(row => row.NICNo.Trim() == request.student.NICNo.Trim()).ToList();
 
                 if (obj.Count > 0)
                 {

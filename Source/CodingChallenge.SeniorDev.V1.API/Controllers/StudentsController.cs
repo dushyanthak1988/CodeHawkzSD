@@ -48,7 +48,8 @@ namespace CodingChallenge.SeniorDev.V1.API.Controllers
                 var result = await mediator.Send(new CreateStudentQuery { student = request });
                 return Ok(result.student);
             }
-            else {
+            else
+            {
                 return BadRequest(Erromsg);
 
             }

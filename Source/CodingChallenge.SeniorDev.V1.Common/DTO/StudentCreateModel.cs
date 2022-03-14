@@ -9,21 +9,22 @@ namespace CodingChallenge.SeniorDev.V1.Common.DTO
 {
     public class StudentCreateModel
     {
-        [RegularExpression(@"^[ST]+\d{0,3}$")]
+        [RegularExpression(@"^[ST]+\d{0,3}$", ErrorMessage = "Please Enter Correct Student ID ")]
         [Required]
         public string RegistrationID { get; set; }
-        [StringLength(30, MinimumLength = 2)]
+        [StringLength(30, ErrorMessage = "Maximum length of First name is 30")]
         [Required]
         public string FirstName { get; set; }
-        [StringLength(30, MinimumLength = 2)]
+        [StringLength(30, ErrorMessage = "Maximum length of Last name is 30")]
         [Required]
         public string LastName { get; set; }
+        [Required]
         public DateTimeOffset Birthdate { get; set; }
         [EmailAddress]
         [Required]
         public string Email { get; set; }
 
-        [RegularExpression(@"^([0-9]{9}[x|X|v|V]|[0-9]{12})$")]
+        [RegularExpression(@"^([0-9]{9}[x|X|v|V]|[0-9]{12})$", ErrorMessage = "Please Enter Correct NIC")]
         [Required]
         public string NICNo { get; set; }
 
