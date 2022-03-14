@@ -20,6 +20,8 @@ namespace CodingChallenge.SeniorDev.V1.DataAccess.EF
             => Courses.Where(c => !c.IsDeleted).OrderBy(c => c.Title).AsNoTracking().ToListAsync();
         public Task<List<Student>> GetAllStudents()
           => Students.Where(c => !c.IsDeleted).OrderBy(c => c.FirstName).AsNoTracking().ToListAsync();
+        public Task<List<Teacher>> GetAllTeacher()
+           => Teachers.Where(c => !c.IsDeleted).OrderBy(c => c.FirstName).AsNoTracking().ToListAsync();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
