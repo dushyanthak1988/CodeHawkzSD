@@ -27,8 +27,31 @@ namespace CodingChallenge.SeniorDev.V1.API.Controllers
         [HttpPost]
         public async Task<ActionResult<StudentModel>> Create(StudentCreateModel request)
         {
-            var result = await mediator.Send(new CreateStudentQuery { student = request });
-            return Ok(result.student);
+
+            string Erromsg = "";
+
+            var validate1 = await mediator.Send(new ValidateStudentQuery { SearchType = ValidateType.RegistrationID, student = request });
+            Erromsg = validate1.Errormsg;
+            if (string.IsNullOrEmpty(Erromsg))
+            {
+                var validate2 = await mediator.Send(new ValidateStudentQuery { SearchType = ValidateType.SearchByEmail, student = request });
+                Erromsg = validate2.Errormsg;
+            }
+            if (string.IsNullOrEmpty(Erromsg))
+            {
+                var validate2 = await mediator.Send(new ValidateStudentQuery { SearchType = ValidateType.SearchByNIC, student = request });
+                Erromsg = validate2.Errormsg;
+            }
+
+            if (string.IsNullOrEmpty(Erromsg))
+            {
+                var result = await mediator.Send(new CreateStudentQuery { student = request });
+                return Ok(result.student);
+            }
+            else {
+                return BadRequest(Erromsg);
+
+            }
         }
 
         [HttpPut]
