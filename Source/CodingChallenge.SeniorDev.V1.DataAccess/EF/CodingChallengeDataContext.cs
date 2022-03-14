@@ -17,7 +17,11 @@ namespace CodingChallenge.SeniorDev.V1.DataAccess.EF
         public virtual DbSet<Teacher> Teachers { get; set; }
 
         public Task<List<Course>> GetAllCourses()
-            => Courses.Where(c => !c.IsDeleted).OrderBy(c => c.Title).AsNoTracking().ToListAsync();
+            => Courses.Where(c => !c.IsDeleted)
+                      .Include(stud => stud.Students)
+                      .Include(Teach => Teach.Teacher)
+                      .OrderBy(c => c.Title)
+                       .AsNoTracking().ToListAsync();
         public Task<List<Student>> GetAllStudents()
           => Students.Where(c => !c.IsDeleted).OrderBy(c => c.FirstName).AsNoTracking().ToListAsync();
         public Task<List<Teacher>> GetAllTeacher()
