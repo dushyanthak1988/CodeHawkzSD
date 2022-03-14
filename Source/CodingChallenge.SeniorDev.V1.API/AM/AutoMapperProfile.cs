@@ -12,6 +12,10 @@ namespace CodingChallenge.SeniorDev.V1.API.AM
                 .ForMember(c => c.TeacherFullName, o => o.MapFrom(c => $"{c.Teacher.FirstName} {c.Teacher.LastName}"))
                 .ForMember(c => c.CurrentStudentCount, o => o.MapFrom(c => c.Students.Count))
                 .ForMember(c => c.CanEnrollMoreStudents, o => o.Ignore());
+            CreateMap<Student, StudentModel>()
+               .ForMember(c => c.FullName, o => o.MapFrom(c => $"{c.FirstName} {c.LastName}"));
+
+
         }
     }
 }
