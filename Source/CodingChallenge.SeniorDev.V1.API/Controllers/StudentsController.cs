@@ -28,13 +28,14 @@ namespace CodingChallenge.SeniorDev.V1.API.Controllers
         public async Task<ActionResult<StudentModel>> Create(StudentCreateModel request)
         {
             var result = await mediator.Send(new CreateStudentQuery { student = request });
-            return Ok(result);
+            return Ok(result.student);
         }
 
         [HttpPut]
         public async Task<ActionResult<List<string>>> Delete(StudentDeleteModel request)
         {
-            return null;
+            var result = await mediator.Send(new DeleteStudentQuery { IDList = request.IDList });
+            return Ok(result.DeletedID);
         }
     }
 }
